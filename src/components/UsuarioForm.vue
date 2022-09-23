@@ -3,11 +3,11 @@
     <label for="nome">Nome</label>
     <input id="nome" name="nome" type="text" v-model="nome" />
 
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" v-model="email" />
-
     <label for="senha">Senha</label>
     <input id="senha" name="senha" type="password" v-model="senha" />
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" v-model="email" />
 
     <label for="cep">Cep</label>
     <input
