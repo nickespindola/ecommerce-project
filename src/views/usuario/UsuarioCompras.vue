@@ -1,10 +1,68 @@
 <template>
-  <p>Lista de Compras</p>
+  <section>
+    <div v-if="compras">
+      <h2>Compras</h2>
+      <div
+        class="produtos-wrapper"
+        v-for="(compra, index) in compras"
+        :key="index"
+      >
+        <ProdutoItem v-if="compra.produto" :produto="compra.produto">
+          <p class="vendedor">
+            <span>Vendedor:</span>
+            {{ compra.vendedor_id }}
+          </p>
+        </ProdutoItem>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-export default {};
+import ProdutoItem from "@/components/ProdutoItem.vue";
+import { api } from "@/services.js";
+import { mapState } from "vuex";
+
+export default {
+  data() {
+    return {
+      compras: null,
+    };
+  },
+  components: { ProdutoItem },
+  methods: {
+    getCompras() {
+      api.get(`/transacao?comprador_id=${this.usuario.id}`).then((response) => {
+        this.compras = response.data;
+      });
+    },
+  },
+  computed: {
+    ...mapState(["usuario", "login"]),
+  },
+  watch: {
+    login() {
+      this.getCompras();
+    },
+  },
+  created() {
+    if (this.login) {
+      this.getCompras();
+    }
+  },
+};
 </script>
 
-<style>
+<style scoped>
+.produto-wrapper {
+  margin-bottom: 40px;
+}
+
+.vendedor span {
+  color: #e80;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
 </style>
