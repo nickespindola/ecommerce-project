@@ -1,5 +1,7 @@
-# ranek-project
+# Ranek-project
 
+## About
+Fictitious ecommerce project, developed in the Vue.JS course by Origamid.
 ## Project setup
 ```
 npm install
